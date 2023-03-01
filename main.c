@@ -6,8 +6,6 @@
 
 #define TIMER 0xFFFEC600
 
-#include <stdio.h>
-
 // initializes timer to 'interval'
 void set_timer(int interval)
 {
@@ -40,10 +38,11 @@ int check_timer()
 
 void wait_for_timer()
 {
-
-    while (check_timer())
+    volatile int checker = 1;
+    // Wait for timer to finish counting
+    while (checker)
     {
-        printf("\n", ((*(int *)(TIMER + 0x04))));
+        checker = check_timer();
     }
 }
 
@@ -72,7 +71,7 @@ int main()
 
         switchValue = (*(int *)SWITCH) & 0b1;
 
-        printf("%d, %d, %d, %d", startButton, stopButton, lapButton, clearButton);
+        // printf("%d, %d, %d, %d", startButton, stopButton, lapButton, clearButton);
 
         if (startButton != 0)
         {
