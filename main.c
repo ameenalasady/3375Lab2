@@ -108,15 +108,15 @@ int main()
                                        (hex_code[(count / 100) % 10] << 16) |
                                        (hex_code[(count / 1000) % 6] << 24);
 
-            (*(int *)HEX5_HEX4_BASE) = hex_code[minutes % 10] |
-                                       (hex_code[(minutes / 10) % 10] << 8);
+            (*(int *)HEX5_HEX4_BASE) = hex_code[(count/6000) % 10] |
+                                       (hex_code[((count/6000) / 10) % 10] << 8);
         }
         else
         {
             (*(int *)HEX3_HEX0_BASE) = hex_code[storedCount % 10] |
                                        (hex_code[(storedCount / 10) % 10] << 8) |
                                        (hex_code[(storedCount / 100) % 10] << 16) |
-                                       (hex_code[(storedCount / 1000) % 10] << 24);
+                                       (hex_code[(storedCount / 1000) % 6] << 24);
 
             (*(int *)HEX5_HEX4_BASE) = hex_code[(storedCount / 6000) % 10] |
                                        (hex_code[((storedCount / 6000) / 10) % 10] << 8);
